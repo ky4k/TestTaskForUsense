@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
   ],
 })
 export class PasswordInputComponent implements ControlValueAccessor {
-  password: string = '';
+  @Input() password: string = '';
 
   // Implementing ControlValueAccessor methods
   private onChange: any = () => {};
@@ -35,7 +35,8 @@ export class PasswordInputComponent implements ControlValueAccessor {
     this.password = value;
   }
 
-  updatePassword(): void {
+  updatePassword(event: Event): void {
+    this.password = (event.target as HTMLInputElement).value;
     this.onChange(this.password);
     this.onTouch();
   }
